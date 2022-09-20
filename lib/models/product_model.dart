@@ -1,10 +1,12 @@
-class ProductModel {
-  final String id;
-  final String title;
-  final String description;
-  final String imageUrl;
-  final double price;
-  bool? favorite;
+import 'package:flutter/material.dart';
+
+class ProductModel with ChangeNotifier{
+   String? id;
+   String? title;
+   String? description;
+   String? imageUrl;
+   double? price;
+  bool? favorite ;
 
   ProductModel(
       {required this.id,
@@ -12,5 +14,13 @@ class ProductModel {
       required this.description,
       required this.imageUrl,
       required this.price,
-      this.favorite});
+      this.favorite = false});
+
+
+  void toggleFav(){
+    favorite = !favorite!;
+    notifyListeners();
 }
+
+}
+
