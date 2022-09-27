@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shop_app_course/models/product_model.dart';
 import 'package:shop_app_course/providers/product_provider.dart';
+import 'package:shop_app_course/screens/cart_screen.dart';
 import 'package:shop_app_course/widgets/grid_item.dart';
 import 'package:shop_app_course/widgets/product_gridview.dart';
 enum filter {allProduct,favorite}
@@ -28,7 +29,9 @@ class _HomeScreenState extends State<HomeScreen> {
         centerTitle: true,
         title: Text("Home"),
         actions: [
-          IconButton(onPressed: () {}, icon: Icon(Icons.shopping_cart)),
+          IconButton(onPressed: () {
+            Navigator.pushNamed(context, CartScreen.routeName);
+          }, icon: Icon(Icons.shopping_cart)),
           PopupMenuButton(
             itemBuilder: (BuildContext context) => <PopupMenuEntry<filter>>[
               PopupMenuItem<filter>(

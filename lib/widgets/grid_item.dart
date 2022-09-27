@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shop_app_course/models/product_model.dart';
+import 'package:shop_app_course/providers/cart_model.dart';
 import 'package:shop_app_course/providers/product_provider.dart';
 import 'package:shop_app_course/screens/product_details_screen.dart';
 
@@ -32,9 +33,16 @@ class GridItem extends StatelessWidget {
                       size: 16));
             },
           ),
-          trailing: Icon(
-            Icons.shopping_cart_outlined,
-            size: 16,
+          trailing: GestureDetector(
+            onTap: (){
+              Provider.of<CartProvider>(context,listen: false).addToCart(product);
+            },
+            child: Icon(
+              Provider.of<CartProvider>(context,listen: true).cartitem.containsKey(product.id) ?
+                  Icons.shopping_cart:
+              Icons.shopping_cart_outlined,
+              size: 16,
+            ),
           ),
         ),
         child: GestureDetector(
