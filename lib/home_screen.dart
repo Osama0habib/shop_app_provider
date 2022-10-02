@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:shop_app_course/models/product_model.dart';
 import 'package:shop_app_course/providers/product_provider.dart';
 import 'package:shop_app_course/screens/cart_screen.dart';
+import 'package:shop_app_course/screens/order_screen.dart';
 import 'package:shop_app_course/widgets/grid_item.dart';
 import 'package:shop_app_course/widgets/product_gridview.dart';
 enum filter {allProduct,favorite}
@@ -61,7 +62,14 @@ class _HomeScreenState extends State<HomeScreen> {
           )
         ],
       ),
-      drawer: Drawer(),
+      drawer: Drawer(child: Column(crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SizedBox(height: 100,),
+          TextButton(child: Text("Orders"),onPressed: (){
+            Navigator.pushNamed(context, OrderScreen.routeName );
+          },),
+        ],
+      )),
       body: ProductGridView( isFavorite: isFavorite,),
     );
   }

@@ -35,7 +35,8 @@ class GridItem extends StatelessWidget {
           ),
           trailing: GestureDetector(
             onTap: (){
-              Provider.of<CartProvider>(context,listen: false).addToCart(product);
+              Provider.of<CartProvider>(context,listen: false).addToCart(product,context);
+
             },
             child: Icon(
               Provider.of<CartProvider>(context,listen: true).cartitem.containsKey(product.id) ?

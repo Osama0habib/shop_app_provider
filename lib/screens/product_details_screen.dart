@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:shop_app_course/models/product_model.dart';
+import 'package:shop_app_course/providers/cart_model.dart';
 
 class ProductDetailsScreen extends StatelessWidget {
   const ProductDetailsScreen({Key? key}) : super(key: key);
@@ -67,7 +69,9 @@ class ProductDetailsScreen extends StatelessWidget {
             color: Colors.blue,
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-            onPressed: () {},
+            onPressed: () {
+              Provider.of<CartProvider>(context,listen: false).addToCart(product, context);
+            },
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [Icon(Icons.shopping_cart), Text("Add to cart")],
