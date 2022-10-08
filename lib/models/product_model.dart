@@ -22,5 +22,16 @@ class ProductModel with ChangeNotifier{
     notifyListeners();
 }
 
+
+   Map<String,dynamic> toMap(){
+     Map<String,dynamic> data = <String,dynamic>{};
+     data["id"] = id;
+     data["title"] = title;
+     data["description"] = description ;
+     data["imageUrl"] = imageUrl;
+     data["price"] = price;
+     return data;
+   }
+
 }
 

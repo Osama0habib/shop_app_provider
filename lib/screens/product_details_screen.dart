@@ -33,8 +33,15 @@ class ProductDetailsScreen extends StatelessWidget {
                 child: Text(product.title!),
               ),
               Positioned(child: FloatingActionButton(
-                onPressed: () {},
-                child: Icon(Icons.favorite),
+                onPressed: () {
+                  // ProductModel productx = Provider.of<ProductModel>(context, listen: true);
+                        product.toggleFav();
+                },
+                child: Icon(
+                    product.favorite == true
+                        ? Icons.favorite
+                        : Icons.favorite_border,
+                    size: 16)
               ),bottom: -25,right:20),
             ],
           ),

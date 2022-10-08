@@ -15,6 +15,17 @@ class CartModel {
       required this.itemCount,
       required this.productModel,
       required this.price});
+
+
+  Map<String,dynamic> toMap(){
+    Map<String,dynamic> data = <String,dynamic>{};
+    data["id"] = id;
+    data["itemCount"] = itemCount;
+    data["price"] = price ;
+    data["product"] = productModel.toMap();
+    print("cartModel map : $data");
+    return data;
+  }
 }
 
 class CartProvider with ChangeNotifier {
@@ -82,5 +93,10 @@ class CartProvider with ChangeNotifier {
         }
       }
     });
+  }
+
+  void clearCart(){
+    _cartitem.clear();
+    notifyListeners();
   }
 }
