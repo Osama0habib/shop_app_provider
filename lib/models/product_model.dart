@@ -9,7 +9,7 @@ class ProductModel with ChangeNotifier{
   bool? favorite ;
 
   ProductModel(
-      {required this.id,
+      { this.id,
       required this.title,
       required this.description,
       required this.imageUrl,
@@ -33,5 +33,10 @@ class ProductModel with ChangeNotifier{
      return data;
    }
 
+
+   ProductModel.formDB(Map<String,dynamic> json){
+   //TODO : convert from json to model
+
+   }
 }
 

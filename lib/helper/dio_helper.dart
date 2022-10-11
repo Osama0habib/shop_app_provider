@@ -11,7 +11,7 @@ class DioHelper {
     }
   }
 
-  void postHttp({url,data}) async {
+  void patchHttp({url,data}) async {
     try {
       var response = await Dio().patch("https://shopapp-course-b43f8-default-rtdb.firebaseio.com/${url}.json",data: data);
       print(response);
@@ -20,5 +20,13 @@ class DioHelper {
     }
   }
 
+  void postHttp({url,data}) async {
+    try {
+      var response = await Dio().post("https://shopapp-course-b43f8-default-rtdb.firebaseio.com/${url}.json",data: data);
+      print(response);
+    } catch (e) {
+      print(e);
+    }
+  }
 
 }

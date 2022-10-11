@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shop_app_course/helper/dio_helper.dart';
 
 import '../models/product_model.dart';
 
@@ -48,6 +49,17 @@ class ProductProvider with ChangeNotifier {
   ProductModel getById(id){
     return product.firstWhere((element) => element.id == id);
   }
+
+  void addProduct(data){
+    DioHelper dio = DioHelper();
+    dio.postHttp(url: "product",data: data) ;
+  }
+
+//   Map<String,dynamic> map = {};
+// map.forEach((key, value) {
+//   ProductModel model = ProductModel(id: key,title: value["title"], description: value["disc"], imageUrl: imageUrl, price: price)
+//
+// })
 }
 
 

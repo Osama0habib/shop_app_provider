@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:shop_app_course/models/product_model.dart';
 import 'package:shop_app_course/providers/product_provider.dart';
 import 'package:shop_app_course/screens/cart_screen.dart';
+import 'package:shop_app_course/screens/my_product_screen.dart';
 import 'package:shop_app_course/screens/order_screen.dart';
 import 'package:shop_app_course/widgets/grid_item.dart';
 import 'package:shop_app_course/widgets/product_gridview.dart';
@@ -64,9 +65,12 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       drawer: Drawer(child: Column(crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(height: 100,),
+          AppBar(),
           TextButton(child: Text("Orders"),onPressed: (){
             Navigator.pushNamed(context, OrderScreen.routeName );
+          },),
+          TextButton(child: Text("My Product"),onPressed: (){
+            Navigator.pushNamed(context, MyProductScreen.routeName );
           },),
         ],
       )),
