@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shop_app_course/providers/auth_provider.dart';
 import 'package:shop_app_course/providers/cart_model.dart';
 import 'package:shop_app_course/providers/order_provider.dart';
 import 'package:shop_app_course/providers/product_provider.dart';
+import 'package:shop_app_course/screens/auth_screen.dart';
 import 'package:shop_app_course/screens/cart_screen.dart';
 import 'package:shop_app_course/screens/edit_my_Product_screen.dart';
 import 'package:shop_app_course/screens/my_product_screen.dart';
@@ -32,6 +34,8 @@ class MyApp extends StatelessWidget {
        create: (ctx) => CartProvider(),),
        ChangeNotifierProvider(
        create: (ctx) => OrderProvider(),),
+         ChangeNotifierProvider(
+           create: (ctx) => AuthProvider(),),
 
 
    ],child: MaterialApp(
@@ -56,8 +60,9 @@ class MyApp extends StatelessWidget {
     OrderScreen.routeName: (ctx) => OrderScreen(),
     MyProductScreen.routeName : (ctx) => MyProductScreen(),
     EditMyProductScreen.routeName : (ctx) => EditMyProductScreen(),
+    LoginScreen.routeName : (ctx) => LoginScreen(),
     },
-    initialRoute: HomeScreen.routeName,
+    initialRoute: LoginScreen.routeName,
     ),);
 
   }

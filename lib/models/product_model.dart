@@ -34,8 +34,13 @@ class ProductModel with ChangeNotifier{
    }
 
 
-   ProductModel.formDB(Map<String,dynamic> json){
+   ProductModel.formDB(key,Map<String,dynamic> json){
    //TODO : convert from json to model
+     id = key;
+     title = json["title"];
+     description = json["description"];
+     imageUrl = json["imageUrl"];
+     price = json["price"];
 
    }
 }

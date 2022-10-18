@@ -14,7 +14,10 @@ class ProductGridView extends StatefulWidget {
   State<ProductGridView> createState() => _ProductGridViewState();
 }
 
+
 class _ProductGridViewState extends State<ProductGridView> {
+  late bool isInit;
+
   @override
   Widget build(BuildContext context) {
     ProductProvider provider =
@@ -34,5 +37,21 @@ class _ProductGridViewState extends State<ProductGridView> {
         );
       },
     );
+  }
+
+
+  @override
+  void initState() {
+    isInit = true;
+  }
+
+  @override
+  void didChangeDependencies() {
+    if(isInit) {
+      Provider.of<ProductProvider>(context, listen: false).getProduct().then((
+          value) {
+        isInit = false;
+      });
+    }
   }
 }

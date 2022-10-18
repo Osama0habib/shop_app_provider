@@ -60,6 +60,18 @@ class ProductProvider with ChangeNotifier {
 //   ProductModel model = ProductModel(id: key,title: value["title"], description: value["disc"], imageUrl: imageUrl, price: price)
 //
 // })
+
+Future<void> getProduct() async {
+  DioHelper dio = DioHelper();
+  await dio.getHttp(url:"product",).then((response) {
+    print(response?.data);
+  final data = response?.data as Map<String,dynamic> ;
+  data.forEach((key, value) {
+    _productList.add(ProductModel.formDB(key ,value));
+  });
+  notifyListeners();
+  });
+}
 }
 
 

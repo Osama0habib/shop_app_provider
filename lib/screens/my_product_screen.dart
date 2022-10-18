@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shop_app_course/models/product_model.dart';
+import 'package:shop_app_course/providers/product_provider.dart';
 import 'package:shop_app_course/screens/edit_my_Product_screen.dart';
 
 class MyProductScreen extends StatelessWidget {
@@ -7,14 +10,31 @@ class MyProductScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    List<ProductModel> products = Provider.of<ProductProvider>(context).product;
     return Scaffold(
-        appBar: AppBar(
-            title: Text("My Product"),
-            actions: [IconButton(onPressed: () {
-              Navigator.pushNamed(context, EditMyProductScreen.routeName);
-            }, icon: Icon(Icons.add))]),
-        body: ListView.builder(itemCount : 4,itemBuilder: (BuildContext context, int index) {
-          return Container();
-        },));
+        appBar: AppBar(title: Text("My Product"), actions: [
+          IconButton(
+              onPressed: () {
+                Navigator.pushNamed(context, EditMyProductScreen.routeName);
+              },
+              icon: Icon(Icons.add))
+        ]),
+        body: ListView.builder(
+          itemCount: products.length,
+          itemBuilder: (BuildContext context, int index) {
+            return ListTile(
+              leading: CircleAvatar(
+                  backgroundImage: NetworkImage(products[index].imageUrl!),
+              ),
+              title: Text(products[index].title!),
+              trailing: Row(mainAxisSize: MainAxisSize.min,
+                children: [
+                IconButton(onPressed: (){}, icon: Icon(Icons.edit) ),
+                IconButton(onPressed: (){}, icon: Icon(Icons.delete)),
+
+              ],),
+            );
+          },
+        ));
   }
 }
