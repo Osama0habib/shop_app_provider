@@ -10,7 +10,7 @@ import 'package:shop_app_course/widgets/product_gridview.dart';
 enum filter {allProduct,favorite}
 
 class HomeScreen extends StatefulWidget {
-  HomeScreen({Key? key}) : super(key: key);
+   HomeScreen({Key? key}) : super(key: key);
 
   static const routeName = "Home";
 
@@ -66,6 +66,7 @@ class _HomeScreenState extends State<HomeScreen> {
       drawer: Drawer(child: Column(crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           AppBar(),
+
           TextButton(child: Text("Orders"),onPressed: (){
             Navigator.pushNamed(context, OrderScreen.routeName );
           },),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shop_app_course/models/product_model.dart';
+import 'package:shop_app_course/providers/auth_provider.dart';
 import 'package:shop_app_course/providers/product_provider.dart';
 
 class EditMyProductScreen extends StatefulWidget {
@@ -18,12 +19,26 @@ class _EditMyProductScreenState extends State<EditMyProductScreen> {
   TextEditingController descriptionController = TextEditingController();
   TextEditingController imageUrlController = TextEditingController();
   bool isImage = false;
+  ProductModel? productLast;
 
   FocusNode priceFocus = FocusNode();
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
+    if(ModalRoute.of(context)?.settings.arguments != null) {
+      productLast = ModalRoute
+          .of(context)
+          ?.settings
+          .arguments as ProductModel;
+    }
+   if(productLast != null) {
+     titleController.text = productLast!.title!;
+     priceController.text = productLast!.price.toString();
+     descriptionController.text = productLast!.description!;
+     imageUrlController.text = productLast!.imageUrl!;
+     isImage = true;
+   }
     return Scaffold(
       appBar: AppBar(),
       body: SingleChildScrollView(
@@ -80,12 +95,23 @@ class _EditMyProductScreenState extends State<EditMyProductScreen> {
                   MaterialButton(
                     onPressed: () {
                       if (formKey.currentState!.validate()) {
-                        ProductModel product = ProductModel(
+                        ProductModel product =
+
+                        ProductModel(
+                            id: ModalRoute.of(context)?.settings.arguments != null ? productLast?.id : "",
                             title: titleController.text,
                             price: double.parse(priceController.text),
                             description: descriptionController.text,
-                            imageUrl: imageUrlController.text);
-                        Provider.of<ProductProvider>(context,listen: false).addProduct(product.toMap());
+                            imageUrl: imageUrlController.text.isEmpty ? "https://cdn.pixabay.com/photo/2016/10/02/22/17/red-t-shirt-1710578_1280.jpg" :imageUrlController.text,
+                            userId: Provider.of<AuthProvider>(context,listen: false).userId);
+
+                       if(ModalRoute.of(context)?.settings.arguments != null) {
+                         Provider.of<ProductProvider>(context, listen: false)
+                             .updateProduct(product);
+                       }else {
+                         Provider.of<ProductProvider>(context, listen: false)
+                             .addProduct(product);
+                       }
                       }
                     },
                     child: Text("Save Product"),

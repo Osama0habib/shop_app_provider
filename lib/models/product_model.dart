@@ -6,6 +6,7 @@ class ProductModel with ChangeNotifier{
    String? description;
    String? imageUrl;
    double? price;
+   String? userId;
   bool? favorite ;
 
   ProductModel(
@@ -14,6 +15,7 @@ class ProductModel with ChangeNotifier{
       required this.description,
       required this.imageUrl,
       required this.price,
+       required this.userId,
       this.favorite = false});
 
 
@@ -25,22 +27,24 @@ class ProductModel with ChangeNotifier{
 
    Map<String,dynamic> toMap(){
      Map<String,dynamic> data = <String,dynamic>{};
-     data["id"] = id;
      data["title"] = title;
      data["description"] = description ;
      data["imageUrl"] = imageUrl;
      data["price"] = price;
+     data["userId"] = userId;
      return data;
    }
 
 
    ProductModel.formDB(key,Map<String,dynamic> json){
    //TODO : convert from json to model
+     print("fromdatabase : $key");
      id = key;
-     title = json["title"];
+     title = json["title"].toString();
      description = json["description"];
      imageUrl = json["imageUrl"];
      price = json["price"];
+     userId = json["userId"];
 
    }
 }

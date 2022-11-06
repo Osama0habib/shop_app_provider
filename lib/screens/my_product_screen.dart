@@ -10,7 +10,7 @@ class MyProductScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<ProductModel> products = Provider.of<ProductProvider>(context).product;
+    List<ProductModel> products = Provider.of<ProductProvider>(context).myProduct;
     return Scaffold(
         appBar: AppBar(title: Text("My Product"), actions: [
           IconButton(
@@ -22,15 +22,19 @@ class MyProductScreen extends StatelessWidget {
         body: ListView.builder(
           itemCount: products.length,
           itemBuilder: (BuildContext context, int index) {
-            return ListTile(
+            return  Provider.of<ProductProvider>(context,listen: false).loading ? CircularProgressIndicator() : ListTile(
               leading: CircleAvatar(
                   backgroundImage: NetworkImage(products[index].imageUrl!),
               ),
               title: Text(products[index].title!),
               trailing: Row(mainAxisSize: MainAxisSize.min,
                 children: [
-                IconButton(onPressed: (){}, icon: Icon(Icons.edit) ),
-                IconButton(onPressed: (){}, icon: Icon(Icons.delete)),
+                IconButton(onPressed: (){
+                  Navigator.pushNamed(context, EditMyProductScreen.routeName,arguments: products[index]);
+                }, icon: Icon(Icons.edit) ),
+                IconButton(onPressed: (){
+                  Provider.of<ProductProvider>(context,listen: false).deleteProduct(products[index]);
+                }, icon: Icon(Icons.delete)),
 
               ],),
             );
